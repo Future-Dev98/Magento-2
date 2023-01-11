@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <!-- override by plugin -->
+    <type name="Training\Custom\Controller\Index\Test">
+        <plugin name="before_plugin" type="Training\Custom\Plugin\TestPlugin" sortOrder="10" disabled="false" />
+    </type>
+
+    <!-- connect db for form grid post -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="training_custom_post_data_source" xsi:type="string">Training\Custom\Model\ResourceModel\Post\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Training\Custom\Model\ResourceModel\Post\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">training_custom_post</argument>
+            <argument name="resourceModel" xsi:type="string">Training\Custom\Model\ResourceModel\Post</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- connect db for form grid category -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="training_custom_post_category_data_source" xsi:type="string">Training\Custom\Model\ResourceModel\Category\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Training\Custom\Model\ResourceModel\Category\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">training_custom_post_category</argument>
+            <argument name="resourceModel" xsi:type="string">Training\Custom\Model\ResourceModel\Category</argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="Training\Custom\Api\Data\PostInterface" type="Training\Custom\Model\Post" />
+    <preference for="Training\Custom\Api\Data\CategoryInterface" type="Training\Custom\Model\Category" />
+
+    <!-- Image Uploader -->
+    <virtualType name="VirtualTypeName" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">training/category</argument>
+            <argument name="basePath" xsi:type="string">training/category</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Training\Custom\Controller\Adminhtml\Category\Uploader">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">VirtualTypeName</argument>
+        </arguments>
+    </type>
+    <!-- End Image Uploader -->
+</config>

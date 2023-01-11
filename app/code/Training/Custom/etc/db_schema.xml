@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="training_custom_post" resource="default" engine="innodb"
+            comment="Training Custom Post Table">
+        <column xsi:type="int" name="post_id" unsigned="false" nullable="false" identity="true" comment="Post ID"/>
+        <column xsi:type="text" name="name" nullable="false" comment="Post Name"/>
+        <column xsi:type="text" name="url_key" nullable="false" comment="Post URL Key"/>
+        <column xsi:type="text" name="post_content" nullable="false" comment="Post Post Content"/>
+        <column xsi:type="int" name="status" nullable="false" default="0" comment="Status"/>
+        <column xsi:type="int" name="categories" nullable="false" comment="Category"/>
+        <column xsi:type="text" name="featured_image" nullable="false" comment="Post Featured Image"/>
+        <column xsi:type="text" name="meta_title" nullable="false" comment="Meta Title"/>
+        <column xsi:type="text" name="meta_description" nullable="false" comment="Meta Description"/>
+        <column xsi:type="text" name="meta_keywords" nullable="false" comment="Meta Keywords"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+        </constraint>
+    </table>
+    <table name="training_custom_post_category" resource="default" engine="innodb"
+            comment="Training Custom Post Table">
+        <column xsi:type="int" name="category_id" unsigned="false" nullable="false" identity="true" comment="Category ID"/>
+        <column xsi:type="text" name="category_name" nullable="false" comment="Category Name"/>
+        <column xsi:type="text" name="url_key" nullable="false" comment="Category URL Key"/>
+        <column xsi:type="text" name="category_content" nullable="false" comment="Category Content"/>
+        <column xsi:type="int" name="status" nullable="false" default="0" comment="Status"/>
+        <column xsi:type="text" name="featured_image" nullable="false" comment="Post Featured Image"/>
+        <column xsi:type="text" name="meta_title" nullable="false" comment="Meta Title"/>
+        <column xsi:type="text" name="meta_description" nullable="false" comment="Meta Description"/>
+        <column xsi:type="text" name="meta_keywords" nullable="false" comment="Meta Keywords"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+        </constraint>
+    </table>
+</schema>
